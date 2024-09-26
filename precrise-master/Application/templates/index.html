@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>SUPMTI DATA SCIENCE PROJECT</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body>
+   
+   <div class="container" id="container">
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a href="#form" role="tab" data-toggle="tab"
+           class="nav-link active"> <img width="34" src="https://cdn-icons-png.flaticon.com/512/671/671808.png" alt=""> Formulaire </a>
+      </li>
+      <li class="nav-item">
+        <a href="#dashboard" role="tab" data-toggle="tab"
+           class="nav-link"> <img width="34" src="https://cdn-icons-png.flaticon.com/512/3953/3953004.png" alt=""> Espace Médecin </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" role="tabpanel" id="form">
+        <div class="form-container sign-in-container">
+            <form action="{{ url_for('predict')}}" method="post">
+             
+             
+            <div class="form-group">
+             <label for="Age">Âge:</label>
+               <select name="Age">
+                 <option value="18">de 18 ans à 24 ans</option>
+                 <option value="25">de 25 ans à 29 ans</option>
+                 <option value="30">de 30 ans à 34 ans</option>
+                 <option value="35">de 35 ans à 39 ans</option>
+                 <option value="40">de 40 ans à 44 ans</option>
+                 <option value="45">de 45 ans à 49 ans</option>
+                 <option value="50">de 50 ans à 54 ans</option>
+                 <option value="52">de 55 ans à 59 ans</option>
+                 <option value="60">de 60 ans à 64 ans</option>
+                 <option value="65">de 65 ans à 69 ans</option>
+                 <option value="70">de 70 ans à 74 ans</option>
+                 <option value="75">de 75 ans à 79 ans</option>
+                 <option value="80">de 80 ans et plus</option>
+                 
+               </select>
+             </label>
+           </div> 
+   
+           <!-- <div class="form-group">
+             
+             <label for="Age">Electroniaue Cigarette Status:</label>
+               <select name="Age">
+                   {% for age in ages %}
+                       <option value="{{ age }}">{{ age }}</option>
+                   {% endfor %}
+               </select>
+             </label>
+           </div> -->
+   
+             <div class="form-group">
+             
+               <label for="sleep">Combien d'heures de sommeil avez-vous en moyenne par nuit ?</label>
+               <select id="sleep" name="SleepHours">
+                   <option value="1">1-2 heures</option>
+                   <option value="2">2-3 heures</option>
+                   <option value="3">3-4 heures</option>
+                   <option value="5">4-5 heures</option>
+                   <option value="8">5-6 heures</option>
+                   <option value="10">6-7 heures</option>
+                   <option value="23">7-8 heures</option>
+                   <option selected="selected" value="24">8-9 heures</option>
+                   <option value="22">9-10 heures</option>
+                   <option value="21">10-11 heures</option>
+                   <option value="20">11-12 heures</option>
+                   <option value="18">12-13 heures</option>
+                   <option value="17">13-14 heures</option>
+               </select>
+             </label>
+             </div>
+              <div class="form-group">
+               <label for="SmokerStatus">Statut de fumeur:</label>
+               <select name="SmokerStatus">
+                 <option value="3">Jamais fumé</option>
+                 <option value="2">Ancien fumeur</option>
+                 <option value="1">Fumeur actuel - fume maintenant quelques jours</option>
+                 <option value="0">Fumeur actuel - fume maintenant tous les jours</option>
+               </select>
+             </div> 
+             
+             <div class="form-group switch">
+               Quel est votre sexe ?
+               <label for="Sex">
+               <input type="checkbox" name="Sex" id="Sex" value="1"  />
+               <span class="toggle_background">
+                 <div class="circle-icon">F</div>
+                 <div class="vertical_line">M</div>
+               </span>
+             </label>
+             </div>
+             <div class="form-group switch">
+               Pratiquez-vous des activités physiques régulièrement ?
+               <label for="DifficultyErrands">
+               <input type="checkbox" name="DifficultyErrands" id="DifficultyErrands" value="1"  />
+               <span class="toggle_background">
+                 <div class="circle-icon">Non</div>
+                 <div class="vertical_line">Oui</div>
+               </span>
+             </label>
+             </div>
+             <div class="form-group switch">
+               Avez-vous des difficultés à effectuer des tâches quotidiennes comme les courses  ?
+               <label for="PhysicalActivities">
+               <input type="checkbox" name="PhysicalActivities" id="PhysicalActivities" value="1"  />
+               <span class="toggle_background">
+                 <div class="circle-icon">Non</div>
+                 <div class="vertical_line">Oui</div>
+               </span>
+             </label>
+             </div>
+             <div class="form-group switch">
+               Buvez-vous de l'alcool ?
+               <label for="AlcoholDrinkers">
+               <input type="checkbox" name="AlcoholDrinkers" id="AlcoholDrinkers" value="1"  />
+               <span class="toggle_background">
+                 <div class="circle-icon">Non</div>
+                 <div class="vertical_line">Oui</div>
+               </span>
+             </label>
+             </div>
+             <div class="form-group switch">
+               Avez-vous été testé positif au COVID-19 ?
+               <label for="CovidPos">
+               <input type="checkbox" name="CovidPos" id="CovidPos" value="1"  />
+               <span class="toggle_background">
+                 <div class="circle-icon">Non</div>
+                 <div class="vertical_line">Oui</div>
+               </span>
+             </label>
+             </div>
+                 
+             <!-- <div class="form-group">
+               <label>Quel est votre salaire ?</label>
+               <input type="text" name="CoapplicantIncome" placeholder="salaire" required="required" />
+             </div> -->
+               
+           
+             <button type="submit" class="btn btn-primary btn-block btn-large">PréCrise</button>
+
+              {% if result > 50 %}
+                  <h2 class="alert alert-danger">{{ prediction_text }}</h2>
+              {% else %}
+                  <h2 class="alert alert-success">{{ prediction_text }}</h2>
+              {% endif %}
+         
+           </form>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-right">
+             <img src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI4LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0NTAwIDQ1MDcuNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDUwMCA0NTA3LjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZGlzcGxheTpub25lO2ZpbGw6IzA0MkI0MTt9Cgkuc3Qxe2ZpbHRlcjp1cmwoI0Fkb2JlX09wYWNpdHlNYXNrRmlsdGVyKTt9Cgkuc3Qye2ZpbGw6I0ZDRkNGRDt9Cgkuc3Qze21hc2s6dXJsKCNTVkdJRF8xXyk7fQoJLnN0NHtmaWxsOiNGREZERkQ7fQoJLnN0NXtmaWxsOiNGREZERkU7fQoJLnN0NntmaWxsOiNGQ0ZDRkM7fQoJLnN0N3tmaWxsOiNERTQwNDM7fQoJLnN0OHtmaWxsOiMwNzJCNDE7fQo8L3N0eWxlPgo8Zz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01NTAzLjQsMjI1My43YzAsMTA3NS0wLjEsMjE0OS45LDAuNiwzMjI0LjljMCwyMy44LTUuNCwyOS4yLTI5LjIsMjkuMmMtMjE0OS45LTAuNi00Mjk5LjgtMC42LTY0NDkuNywwCgkJYy0yMy44LDAtMjkuMi01LjQtMjkuMi0yOS4yYzAuNi0yMTQ5LjksMC42LTQyOTkuOCwwLTY0NDkuN2MwLTIzLjgsNS40LTI5LjIsMjkuMi0yOS4yYzIxNDkuOSwwLjYsNDI5OS44LDAuNiw2NDQ5LjcsMAoJCWMyMy44LDAsMjkuMiw1LjQsMjkuMiwyOS4yQzU1MDMuNCwxMDMuOCw1NTAzLjQsMTE3OC43LDU1MDMuNCwyMjUzLjd6Ii8+Cgk8ZGVmcz4KCQk8ZmlsdGVyIGlkPSJBZG9iZV9PcGFjaXR5TWFza0ZpbHRlciIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSIyOTEuNiIgeT0iNjU5LjciIHdpZHRoPSIzOTI2LjgiIGhlaWdodD0iMzE4Mi4xIj4KCQkJPGZlRmxvb2QgIHN0eWxlPSJmbG9vZC1jb2xvcjp3aGl0ZTtmbG9vZC1vcGFjaXR5OjEiIHJlc3VsdD0iYmFjayIvPgoJCQk8ZmVCbGVuZCAgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iYmFjayIgbW9kZT0ibm9ybWFsIi8+CgkJPC9maWx0ZXI+Cgk8L2RlZnM+Cgk8bWFzayBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSIyOTEuNiIgeT0iNjU5LjciIHdpZHRoPSIzOTI2LjgiIGhlaWdodD0iMzE4Mi4xIiBpZD0iU1ZHSURfMV8iPgoJCTxnIGNsYXNzPSJzdDEiPgoJCQk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNMjQwNC41LDI2NTkuOGMtNS4xLTQ4LjUtMjMuMy04Ny44LTQ3LjYtMTIzLjhjLTI1LjUtMzcuOC0yNi40LTc0LjQtMy41LTExMi45CgkJCQljNi41LTEwLjksMTEuMy0yMi44LDE3LjYtMzMuOGMzNy43LTY1LDM0LjItMTI5LjEtMy42LTE5Mi42Yy02LTEwLTExLjQtMjAuNC0xNy44LTMwYy0yMC4yLTMwLjUtMjAuMS02MS40LTMuMi05MwoJCQkJYzktMTYuOCwxNy42LTMzLjgsMjcuMS01MC4zYzM0LjItNTkuNCwzOC44LTEyMi4yLTAuOS0xNzcuMmMtNDcuOS02Ni4zLTQyLjEtMTIzLjgsMC42LTE4OC41YzM5LjItNTkuNSwzMi41LTEyMi44LTMuOC0xODMKCQkJCWMtOC4yLTEzLjYtMTYuNi0yNy4xLTI1LjYtNDAuMmMtMjQuNC0zNS40LTI2LjEtNzIuOC0yLTEwN2M0Ny41LTY3LjUsNTguMi0xNDEuMyw0Ni43LTIyMC43Yy05LjUtNjUuNCwxNy4xLTExOC4yLDYxLTE2My4yCgkJCQljNzEtNzIuNywxNjAtMTExLjEsMjU5LjItMTIyLjRjMjM1LjYtMjYuOCw0NDAuNiwzMy43LDU4OC41LDIyOS4xYzE5MS44LDI1My42LDE2NC42LDYxNS4zLTYyLDgzOS40CgkJCQljLTE3MC4xLDE2OC4yLTM0OS42LDMyNi41LTUyNS4zLDQ4OC44QzI2MDkuNywyNDcxLDI1MDkuMywyNTYzLjMsMjQwNC41LDI2NTkuOHoiLz4KCQkJPHBhdGggZD0iTTUzOC4xLDM0NTMuNGMtMzAuMywwLTUxLjUtMS03Mi42LDAuM2MtMTcuMiwxLjEtMjEuNC01LjktMjEuMi0yMS45YzAuNi02Mi40LDAuMS0xMjQuOCwwLTE4Ny4yYzAtOS43LTEtMTkuNCwxMy43LTE5CgkJCQljNTQuOCwxLjUsMTEwLjEtNi40LDE2NC4yLDcuM2M1Ny4zLDE0LjUsODEuNyw1MC45LDc4LjksMTE2LjNjLTIuNCw1Ny4xLTMwLjksODkuNS04Ni44LDEwMC4zCgkJCQlDNTg2LDM0NTUsNTU3LjQsMzQ1Mi42LDUzOC4xLDM0NTMuNHoiLz4KCQkJPHBhdGggZD0iTTE1OTcuOSwzNTEwLjhjLTM2LjksMC03My44LTAuMS0xMTAuNywwLjFjLTEyLjIsMC4xLTE5LjYtMS41LTE3LjUtMTcuNmM3LjQtNTcuMyw1OS41LTEwNC44LDExOS42LTEwNy41CgkJCQljNzUuMy0zLjMsMTI1LjgsMzAuNiwxMzkuMSw5Mi4yYzQuOSwyMi44LDMuMiwzNS42LTI2LDMzLjRDMTY2Ny43LDM1MDguOSwxNjMyLjcsMzUxMC45LDE1OTcuOSwzNTEwLjh6Ii8+CgkJCTxwYXRoIGQ9Ik0zOTQ4LjQsMzUxMS4zYy0zNS45LDAtNzEuOCwwLjItMTA3LjctMC4xYy0xMC0wLjEtMjEuMywyLjktMTkuOC0xNS40YzUuMS01OC45LDYwLjEtMTA4LjksMTIzLjYtMTEwLjYKCQkJCWM3NS4yLTIsMTI0LjgsMzYuMiwxMzQuNSwxMDEuNmMzLjEsMjAuNy0zLjYsMjUuNy0yMy4xLDI1Yy0zNS44LTEuMy03MS44LTAuNC0xMDcuNy0wLjQKCQkJCUMzOTQ4LjQsMzUxMS40LDM5NDguNCwzNTExLjMsMzk0OC40LDM1MTEuM3oiLz4KCQk8L2c+Cgk8L21hc2s+Cgk8ZyBjbGFzcz0ic3QzIj4KCQk8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNMjI2My44LDk0MC4yYzkzLjgtMTQ3LjQsMjMxLTIyNS43LDM5My4zLTI2MS44YzMyNC44LTcyLjMsNjY2LjEsODguMiw4MjAuOCwzODIuNgoJCQljMTU5LjMsMzAzLDExMi4zLDY1Ni4zLTEyNC4zLDkxMy40Yy0xMDQuOCwxMTMuOC0yMjQuOSwyMTEuOS0zMzguNSwzMTYuNmMtMjQyLDIyMy4yLTQ4NS4zLDQ0NS4xLTcyNy45LDY2Ny42CgkJCWMtMzQuNSwzMS43LTQ1LjQsMzEuNC04Ny45LTcuM2MtMTE5LjgtMTA5LTIzOS41LTIxOC4xLTM1OS0zMjcuNWMtMjEzLjEtMTk1LjItNDI2LjItMzkwLjUtNjM4LjgtNTg2LjMKCQkJYy0xNjYuMi0xNTMtMjYyLjctMzQwLjMtMjc1LjEtNTY3LjljLTE3LjYtMzI0LjEsMTc5LjctNjM1LjEsNDgyLjgtNzUxLjNjMjYzLjYtMTAxLjEsNTEzLTczLjgsNzQwLjIsMTAxLjQKCQkJQzIxOTMsODUzLjMsMjIyOC41LDg5NS41LDIyNjMuOCw5NDAuMnoiLz4KCQk8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNMjkyLjQsMzQ2MGMwLTExMS4yLDAuNi0yMjIuMy0wLjUtMzMzLjVjLTAuMi0yMS41LDQuNC0yOS4yLDI3LjUtMjguNWMxMDYuOCwzLjIsMjE0LTUuNywzMjAuNSw1LjkKCQkJYzE3OCwxOS4zLDI3My40LDE5Mi4yLDE5Ny4zLDM1NS42Yy0yNy45LDU5LjktNzcuNCw5My4xLTE0MC4zLDEwOS4xYy03NCwxOC44LTE0OS41LDEzLTIyNC40LDEzLjFjLTIzLjIsMC0zMC45LDQuOS0zMC4xLDI5LjUKCQkJYzEuOSw2Mi40LTAuMiwxMjQuOSwxLjEsMTg3LjRjMC40LDIxLjEtMy43LDMwLjgtMjcuNCwyOS40Yy0zMi43LTItNjUuNy0yLjEtOTguNC0wLjRjLTIyLjEsMS4xLTI1LjktNy44LTI1LjgtMjcuNgoJCQljMC44LTExMy4zLDAuNC0yMjYuNiwwLjQtMzM5LjlDMjkyLjIsMzQ2MCwyOTIuMywzNDYwLDI5Mi40LDM0NjB6Ii8+CgkJPHBhdGggY2xhc3M9InN0MiIgZD0iTTE2NjIuOCwzNjA3LjNjLTU5LjIsMC0xMTguNSwwLjYtMTc3LjctMC40Yy0xOC45LTAuMy0yMy43LDQuMy0xOC40LDIzLjNjMTQuOSw1My42LDYwLDkyLDExOS44LDk4LjQKCQkJYzYyLjMsNi43LDEyMC4zLTYuNiwxNzEuNS00M2MxNi40LTExLjcsMjQuNy05LjgsMzUsNS44YzExLjEsMTYuNywyMi44LDMzLjQsMzYuOCw0Ny42YzEzLjMsMTMuNCwxMi43LDIwLjktMi45LDMxLjIKCQkJYy0xMDYuMSw2OS45LTIyMC4zLDkyLjMtMzQxLjUsNTAuNGMtMTA4LjYtMzcuNi0xNTcuMy0xMjIuMy0xNjYtMjMyLjljLTEwLjUtMTMzLjksNTEuNi0yNDYuNCwxNjMtMjg3LjQKCQkJYzg2LjgtMzIsMTc1LjMtMjkuNSwyNTkuMywxMS4xYzg2LjgsNDEuOSwxMTcuMywxMjEuMSwxMjYsMjEwLjNjOC40LDg1LjUsNi43LDg1LjctNzcuOSw4NS43CgkJCUMxNzQ3LjUsMzYwNy4zLDE3MDUuMiwzNjA3LjMsMTY2Mi44LDM2MDcuM3oiLz4KCQk8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNNDAxMywzNjA3LjZjLTU4LjIsMC0xMTYuNSwwLjktMTc0LjctMC40Yy0yMS45LTAuNS0yNS4zLDYuMy0xOC43LDI1LjZjMTguNSw1NC4yLDU1LjIsODcuMSwxMTEuOSw5NS4zCgkJCWM2NC43LDkuNCwxMjUtNC42LDE3Ny4yLTQzLjhjMTguNC0xMy44LDI2LTksMzcuMSw2YzExLjksMTYuMiwyNC44LDMxLjgsMzguNiw0Ni4zYzEwLDEwLjYsMTEuNywxNi45LTAuOCwyNy42CgkJCWMtOTMuMiw3OS42LTI2NS45LDEwMS4xLTM3NS4zLDQ1LjFjLTc4LTM5LjktMTE4LjMtMTA2LjctMTMxLjMtMTkxYy04LjgtNTcuMy00LjUtMTE0LjEsMTUuMS0xNjkuMQoJCQljMjcuMy03Ni40LDc3LjYtMTMwLDE1Ni41LTE1NC4zYzcyLjItMjIuMiwxNDQuMi0yMC42LDIxNS4zLDMuOGM3OS4yLDI3LjIsMTIzLjcsODUuNiwxNDIuOSwxNjUuMWM5LDM3LjIsMTEuOSw3NSwxMS41LDExMy40CgkJCWMtMC4yLDIyLjktNi4yLDMxLjYtMzAuNywzMC44Yy01OC4yLTEuOC0xMTYuNC0wLjYtMTc0LjctMC42QzQwMTMsMzYwNy41LDQwMTMsMzYwNy42LDQwMTMsMzYwNy42eiIvPgoJCTxwYXRoIGNsYXNzPSJzdDQiIGQ9Ik0zNDAxLjIsMzI4MC44YzYxLjEsMS40LDExMi45LDEwLjMsMTYzLjQsMjhjMjIuMiw3LjgsMzEuOCwxNi45LDE4LjYsNDAuOGMtMTAuMiwxOC40LTE4LDM4LjQtMjQuNSw1OC41CgkJCWMtNi4xLDE4LjgtMTMuNywyMi44LTMxLjksMTIuOWMtNDIuNy0yMy4zLTg4LjktMzMuNi0xMzcuOC0yOS41Yy0zNC43LDIuOS01Ni4yLDE4LjgtNTcuNiw0My44Yy0xLjgsMzAuNSwyMC4yLDQyLjgsNDQsNTAuNgoJCQljMzguMiwxMi41LDc3LjUsMjEuNywxMTUuNiwzNC42Yzc3LDI2LDExMC43LDY5LjEsMTEyLjEsMTM5LjhjMS41LDc5LjEtMzMuOCwxMzYuNS0xMDcuNywxNjIuMgoJCQljLTEwNS41LDM2LjYtMjA2LjUsMTYuOC0zMDMuMi0zMy42Yy0xMi4zLTYuNC0xNi41LTE0LTcuOS0yNy43YzEzLjUtMjEuNSwyNS45LTQzLjgsMzcuMS02Ni41YzcuOC0xNS44LDE0LjktMTUuOSwyOC4zLTUuOQoJCQljNDcuNSwzNS41LDEwMi43LDQzLjEsMTU5LjksMzkuNmMyNS40LTEuNSw0OS4xLTEwLDU0LjMtMzkuNGM1LjQtMzAuMi0xNC43LTQ1LjQtMzkuMS01My41Yy0zOC4xLTEyLjctNzcuNC0yMS43LTExNS43LTM0CgkJCWMtMTAyLjUtMzMtMTQ0LTExNy42LTEwNC44LTIxNy4zYzI4LjItNzEuNiw5MS40LTkyLjEsMTYwLjItMTAxLjNDMzM3OS4yLDMyODAuNywzMzk0LjIsMzI4MS4xLDM0MDEuMiwzMjgwLjh6Ii8+CgkJPHBhdGggY2xhc3M9InN0NSIgZD0iTTE5NTYuNiwzNTYyLjNjMC0xNjgsMTEyLjItMjgxLjUsMjgwLjEtMjgzLjNjNzEuMi0wLjcsMTM4LjUsMTQuMywyMDAuNyw1MC4yYzE2LjMsOS40LDIxLjQsMTkuMSw5LjUsMzQuOQoJCQljLTIuNSwzLjQtNC4xLDcuNC02LjIsMTFjLTEzLjYsMjMuOS0yMS42LDU3LTQyLjIsNjkuNGMtMjQuNCwxNC43LTQyLjEtMjMuMS02Ni44LTMxLjdjLTU4LjctMjAuNC0xMTYuOC0yOS42LTE2OS4zLDEwLjUKCQkJYy01Ni44LDQzLjQtNjQuNywxMDcuMi01Ni42LDE3Mi42YzExLjcsOTQuMiw3OC44LDE0Mi45LDE3Mi42LDEyOS4yYzI4LjUtNC4xLDU1LjgtMTEuOSw4MC45LTI2LjVjMzUuNy0yMC43LDM1LjgtMjAuNiw1OS44LDE1LjEKCQkJYzQuMSw2LjEsOC40LDEyLjIsMTIuNiwxOC4zYzMwLjQsNDQsMzAuNyw0NC41LTE3LDY3LjhjLTc5LjUsMzguOC0xNjMsNTEuMy0yNTAuMSwzNC41CgkJCUMyMDM0LjgsMzgwOS40LDE5NTYuNSwzNzA2LjQsMTk1Ni42LDM1NjIuM3oiLz4KCQk8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNMjY4MC43LDMzNzIuOGMzNy01Ny45LDg0LjMtODMuNSwxNDQuMi04N2MyMS41LTEuMywzNC4yLDEsMjcuOCwyOC42Yy04LjEsMzQuOS0xMi43LDcwLjctMTcuNywxMDYuMwoJCQljLTIuNCwxNy4yLTkuNiwyMi44LTI3LjQsMjAuNWMtODIuNy0xMC43LTEyMS41LDM4LjMtMTI0LjksMTE4LjRjLTMuMyw3OS4yLTIuMSwxNTguNi0wLjMsMjM3LjhjMC42LDI2LjEtNy43LDMyLjQtMzIsMzAuOAoJCQljLTMxLjYtMi4xLTYzLjQtMS42LTk1LjEtMC43Yy0xNS40LDAuNC0xOS45LTQuOC0xOS44LTE5LjljMC42LTE2NC45LDAuNy0zMjkuOSwwLjQtNDk0LjhjMC0xNS4xLDQuNi0yMC43LDE5LjktMjAuMQoJCQljMjUuMywxLDUwLjgsMS43LDc2LjEtMC4xYzI0LjUtMS44LDM3LjgsNS44LDM5LjMsMzEuOUMyNjcxLjcsMzMzNy45LDI2NzYuMSwzMzUwLjksMjY4MC43LDMzNzIuOHoiLz4KCQk8cGF0aCBjbGFzcz0ic3Q0IiBkPSJNMTA5Ni4zLDMzNjkuN2MzNS4xLTU1LjksODMuOS03OC44LDE0Mi44LTg0LjJjMjMtMi4xLDMyLjgsMS43LDI1LjgsMjguNmMtOS4xLDM0LjctMTMuOCw3MC42LTE5LjYsMTA2LjEKCQkJYy0yLjUsMTUtOCwyMS43LTI1LDE5LjdjLTgzLjQtOS44LTExOS42LDM4LjgtMTIyLjgsMTEzLjVjLTMuNSw4MS40LTIuNywxNjMtMS42LDI0NC41YzAuMywyNC41LTcuMiwzMS4zLTMwLjYsMjkuOAoJCQljLTMwLjYtMi02MS40LTEuNi05Mi4xLTAuOGMtMTYuOCwwLjUtMjEuNi01LjUtMjEuNS0yMmMwLjQtMTYzLjEsMC40LTMyNi4xLTAuMy00ODkuMmMtMC4xLTE3LjEsNS42LTIyLjgsMjEuOC0yMS4zCgkJCWM5LjQsMC45LDE5LDAuMSwyOC42LDAuMUMxMDc1LjcsMzI5NC42LDEwNzUuNywzMjk0LjYsMTA5Ni4zLDMzNjkuN3oiLz4KCQk8cGF0aCBjbGFzcz0ic3Q2IiBkPSJNMzA4MS4zLDM1NjIuOGMwLDc5LjMtMC44LDE1OC41LDAuNSwyMzcuOGMwLjMsMjEuMy02LjMsMjcuNi0yNi43LDI2LjZjLTMyLjctMS41LTY1LjUtMS40LTk4LjMtMC44CgkJCWMtMTUuMSwwLjMtMTkuOS01LjEtMTkuOS0yMC4yYzAuNi0xNjQuOSwwLjctMzI5LjcsMC40LTQ5NC42YzAtMTUuOCw2LjMtMTkuOSwyMC43LTE5LjVjMzIuNywwLjksNjUuNSwxLjgsOTguMywwLjcKCQkJYzIwLTAuNywyNC45LDcuMiwyNC43LDI1LjljLTAuOCw4MS40LTAuMywxNjIuNy0wLjMsMjQ0LjFDMzA4MC44LDM1NjIuOCwzMDgxLjEsMzU2Mi44LDMwODEuMywzNTYyLjh6Ii8+CgkJPHBhdGggY2xhc3M9InN0NiIgZD0iTTMwMTAuMywzMjA2LjVjLTUzLjgsMC03OC44LTI0LjYtNzguMy03Ni45YzAuNS01NS4zLDI1LjYtODEuNSw3OC4zLTgxLjljNTguMy0wLjQsODAuNSwyMS45LDgwLjIsODAuNwoJCQlDMzA5MC4xLDMxODQuNCwzMDY3LjUsMzIwNi41LDMwMTAuMywzMjA2LjV6Ii8+CgkJPHBhdGggY2xhc3M9InN0NyIgZD0iTTIyMzYuNCwyODczLjFjLTYzLjQtNTcuNC0xMjAuNy0xMDguOC0xNzcuNS0xNjAuOGMtMjU2LjgtMjM1LjMtNTEzLjMtNDcwLjktNzcwLjEtNzA2LjEKCQkJYy05Ni4xLTg4LTE4MC44LTE4NC0yMzAuNi0zMDdjLTE2NS43LTQwOSw3Ni43LTg2NC42LDUwNy43LTk0MS41YzI2MS40LTQ2LjcsNDgzLjgsMjgsNjQ5LjIsMjQ1LjFjMTQuMiwxOC42LDI0LjIsMzYuOSwxOCw2MQoJCQljLTEuMyw1LTEuMSwxMC42LTAuNiwxNS44YzcuMSw3NC4zLTUuNCwxNDEuOC00NC45LDIwOC42Yy0zNi45LDYyLjUtMjcsMTMzLjEsNy4xLDE5Ny45YzcuNCwxNCwxNS4yLDI4LjMsMjUuNCw0MC4yCgkJCWMyNS41LDMwLDIyLjUsNTguOSwxLjgsODkuOGMtMjQuOSwzNy4zLTQ0LjcsNzYuNy00Ny4xLDEyM2MtMi42LDUyLjYsNi41LDEwMi42LDQwLjQsMTQzLjRjMzAuNSwzNi43LDI4LDY4LjgsMi4zLDEwNS45CgkJCWMtMzcuOSw1NC41LTUzLjEsMTE0LjctMzcuMSwxODAuOWM3LjEsMjkuMiwxOCw1Ny4zLDM3LjMsODBjMjcuNSwzMi40LDIzLjcsNjIuMywyLDk1LjJjLTI0LjEsMzYuNS00Mi41LDc1LjUtNDQuNSwxMjAuNgoJCQljLTIuMyw1MS41LDguOSw5OS4yLDM5LDE0MS4xYzE3LDIzLjYsMjMuMiw0OC41LDIyLjYsNzcuMkMyMjM1LjUsMjc0My41LDIyMzYuNCwyODAzLjcsMjIzNi40LDI4NzMuMXoiLz4KCQk8cGF0aCBjbGFzcz0ic3Q4IiBkPSJNMjMyMS44LDI4MDQuNGMwLTIxLjMtMS4xLTQwLjQsMC4yLTU5LjNjNC45LTY4LjktMS44LTEzMy44LTQxLjYtMTk0LjRjLTI3LjctNDIuMi0yNS43LTkwLjctNC45LTEzNy4zCgkJCWM2LjUtMTQuNSwxMi41LTI5LjMsMjAuNS00M2MzMC43LTUyLjgsMzEuMS0xMDQuMy00LjMtMTU1LjFjLTQzLTYxLjUtNDEuNi0xMjQuMi01LjYtMTg4LjNjOC44LTE1LjcsMTYuNC0zMi4xLDIzLjgtNDguNAoJCQljMTYtMzUuMiwxNS4yLTY5LjctNS4yLTEwMy4zYy02LjYtMTAuOC0xMi4zLTIyLjMtMTktMzNjLTMzLjktNTQuMi0zNi4xLTEwOS4zLTUuNC0xNjUuNmM2LjEtMTEuMiwxMS0yMywxNy40LTMzLjkKCQkJYzMwLjktNTMsMzAuMy0xMDQuNC02LjktMTU0LjRjLTUzLjMtNzEuNy01My41LTE0NC41LTQuMy0yMTguMmMyNy00MC4zLDM5LjUtODQuNCwzMy0xMzIuNmMtMjAuMS0xNDkuMyw1Ny43LTI0NC40LDE3Ny42LTMxMS43CgkJCWMxNjYuMy05My40LDM0My43LTEwMSw1MjMuMi00Ny43YzI1NS40LDc1LjksNDM3LjYsMzAzLDQ2Mi44LDU3Mi43YzIzLjEsMjQ2LjYtNTkuMyw0NTMuNy0yNDEuNyw2MjAuOAoJCQljLTI5Ny41LDI3Mi41LTU5NS40LDU0NC41LTg5My4zLDgxNi41QzIzNDEuMywyNzk0LjQsMjMzNS44LDI4MDMsMjMyMS44LDI4MDQuNHoiLz4KCQk8cGF0aCBjbGFzcz0ic3Q1IiBkPSJNMTYzNS43LDg0OC45YzQ2LjItMS41LDU4LjUsOS43LDYyLjcsNDkuM2M0LjUsNDEuNi05LjQsNjMuNy00Ni41LDY5LjRjLTEzMy44LDIwLjQtMjM3LjksODkuMy0zMjAuMSwxOTQuMgoJCQljLTQxLjEsNTIuNS02Ny43LDExMS45LTgwLjcsMTc3LjVjLTguNSw0My00Ni42LDY0LjItODguNCw1MC41Yy0xOC45LTYuMi0yNS43LTIxLTI2LjQtMzkuMmMtMS4xLTI4LjgsMi41LTU3LjUsMTEuMy04NC42CgkJCWM3Mi4yLTIyMS43LDIyMS42LTM1OS45LDQ0OS4zLTQxMi4xQzE2MTIuMyw4NTAuMywxNjI4LjMsODQ5LjgsMTYzNS43LDg0OC45eiIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo='/>
+              <h1>Prédiction du Risque de Crise Cardiaque</h1>
+              <p>Découvrez votre niveau de risque de crise cardiaque grâce à notre outil de prédiction des maladies cardiaques. En répondant à quelques questions simples sur votre mode de vie et vos antécédents médicaux, notre algorithme utilise des données probantes pour estimer votre probabilité de développer une crise cardiaque. Prenez le contrôle de votre santé cardiaque dès maintenant en obtenant des informations précieuses et des conseils pour réduire votre risque.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" role="tabpanel" id="dashboard">
+        <iframe title="Crise_Cardiaque" width="1467" height="690" src="https://app.powerbi.com/reportEmbed?reportId=ebc35584-d06e-4fd5-b93e-82489bd71e61&autoAuth=true&ctid=a99950fd-2582-4f30-916e-fc061b7a258b" frameborder="0" allowFullScreen="true"></iframe>
+      </div>
+    </div>
+   </div>
+   
+   <footer>
+     <p> Created <i class="fa fa-heart"></i> by Hamza Drissi Kacemi & Hamza Benhida </p>
+   </footer>
+ </div>
+<!-- Run By cmd: python app.py -->
+<script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous">
+</script>
+</body>
+</html>
